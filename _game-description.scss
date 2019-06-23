@@ -1,0 +1,253 @@
+#game-description-page {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+    // background:filter-gradient(#a48551, #a48551, vertical);
+    background: #eacda3;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #d6ae7b, #eacda3);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #d6ae7b, #eacda3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  display: none;
+  line-height: 22px;
+
+  #game-description {
+    width: 80%;
+    height: 70%;
+    
+    z-index: 3;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    
+
+    // h3 {
+    //   text-align: center;
+    //   font-size: 16px;
+    //   margin-top: 12px;
+    // }
+
+    // CHANGING PRIZE GRID, TO TAKE UP ONE COLUMN!
+
+    // STYLING THE HEADINGS AND DESCRIPTION
+    .game-description-header {
+      font-weight: 800;
+      line-height: 12vmin;
+      
+      font-size: 11vmin;
+      line-height: 1;
+      text-align: center;
+    }
+
+    .game-description-subheader {
+
+      margin-top: 3vmin;
+      line-height: 5vmin;
+      font-size: 4vmin;
+      font-weight:200;
+      text-align:center;
+      span {
+        font-weight: bold;
+      }
+      
+    }
+
+    .game-description-cta {
+      border-radius: 50px;
+      border: none;
+      background: #a61f6c;
+      height: 55px;
+      width: 80%;
+      color: white;
+      font-weight: 800;
+      font-size: 100%;
+      box-shadow: 0 2px 10px 3px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: 0.2s;
+      
+      &:hover {
+        box-shadow: 0 6px 20px 5px rgba(0, 0, 0, 0.2);
+        background-color: white;
+        color: #a61f6c;
+        box-shadow: 0 6px 20px 5px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    .game-description-hearts-image {
+      width: 50vmin;
+      margin: 2vmin;
+    }
+  }
+}
+
+//Some elf placements
+#elf-description {
+  position: fixed;
+  bottom: 0;
+  left: -11%;
+  opacity: 0;
+  z-index: 10;
+  width: 40%;
+}
+
+// SCORE GRID DESCRIPTION PAGE
+#game-description-score-container {
+  display:grid;
+  width:50%;
+  height:auto;
+  grid-template-columns:1fr 0.2fr 1fr;
+  align-items:center;
+  justify-items:center;
+  
+ 
+  
+  img {
+    width:auto;
+    height:5vmin;
+  }
+
+  .score-amount {
+    font-size:4vmin;
+   
+  }
+
+  .equals {
+    font-size:6vmin;
+  }
+}
+
+// PRIZE GRID ON DESCRIPTION PAGE
+#prize-grid-description {
+  grid-column: 1/1;
+  width: 100%;
+  display: grid;
+  grid-row-gap: 10%;
+  justify-self: left;
+
+  .prize {
+    //3 column grid, text in middle, icon on right
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    p {
+      grid-column: 2/3;
+      justify-self: center;
+    }
+  }
+
+  .active {
+    background-color: #a88852;
+    color: #ffffff;
+    border: 1px solid #a88852;
+  }
+
+  .inactive {
+    background-color: #484848;
+    border: 1px solid #a88852;
+    color: #6c6c6c;
+  }
+}
+
+//TABLET STYLES
+@media screen and (min-width: 720px) {
+  #game-description-page {
+    top: 5%;
+  }
+
+  #game-description {
+    height: 65% !important;
+    margin-top: -10% !important;
+  }
+
+  .game-description-header {
+    font-size: 5vw !important;
+    width: 60%;
+    text-align: center;
+  }
+  .game-description-subheader {
+    font-size: 2.5vw !important;
+  }
+
+  .game-description-subheader-2 {
+    font-size: 3.5vw;
+  }
+
+  .game-description-hearts-image {
+    width: 25vmin !important;
+  }
+  .game-description-cta {
+    width: 30% !important;
+  }
+  #elf-description {
+    position: fixed;
+    bottom: 0;
+    left: -5%;
+    opacity: 0;
+    z-index: 10;
+    width: 25%;
+  }
+
+  #prize-grid-description {
+    width: 50%;
+    justify-self: center;
+  }
+
+  .prize {
+    padding: 0.5em;
+  }
+}
+
+//DESKTOP STYLES
+@media screen and (min-width: 1024px) {
+  #game-description {
+    height: 80% !important;
+    margin-top: 0 !important;
+
+    h3 {
+      line-height: 2;
+      text-align: center;
+      width: 46%;
+    }
+  }
+
+  .game-description-header {
+    font-size: 7vmin !important;
+    width: 100% !important;
+    font-weight: 800 !important;
+    line-height: 7vmin !important;
+  }
+
+  .game-description-subheader {
+    font-size: 2vmin !important;
+    margin-top: 0 !important;
+    line-height: 3vmin !important;
+    width: 100% !important;
+    font-weight:200;
+
+    span {
+      font-weight: bold !important;
+      // margin-top:200vmin;
+      // margin-top:5vmin !important;
+    }
+
+    h3 {
+      margin-bottom: -50px !important;
+      span {
+        font-size: 2.5vw !important;
+      }
+    }
+  }
+
+  .game-description-hearts-image {
+    margin: 0 !important;
+  }
+
+  .game-description-cta {
+      width:30% !important;
+  }
+}
