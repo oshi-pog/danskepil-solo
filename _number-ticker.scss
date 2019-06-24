@@ -39,7 +39,7 @@ html {
   align-items: center;
   margin-top:-15%;
 
-  height: 50%;
+  height: 60%;
   width: 80%;
 }
 
@@ -59,11 +59,16 @@ html {
   }
 }
 
-.digit, .number-ticker-currency {
+#count-up-number-p {
   font-family: 'unicorn_popregular';
   font-weight:200;
   color:#fbb03b;
   -webkit-text-stroke:3px #a67c52;
+  font-size: 15vmin;
+
+  .count-number {
+    font-family: 'unicorn_popregular';
+  }
   
 }
 

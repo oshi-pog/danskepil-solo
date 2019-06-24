@@ -192,6 +192,7 @@ function validateAge(userYear, userMonth, userDay) {
     } else {
       playBtn.addEventListener("click", function(e) {
         playStart(e);
+        countStart()
       });
     }
 
@@ -233,13 +234,7 @@ function showSpeechBubble() {
   speechBubbleSubHeaderNode.innerHTML = speechBubbleSubHeader;
   console.log("speech bubble shown");
   //rotate elf
-  TweenMax.to(elfSpeech, 0.2, { rotation: -1 });
-  setTimeout(() => {
-    TweenMax.to(elfSpeech, 0.2, { rotation: 2 });
-  }, 200);
-  setTimeout(() => {
-    TweenMax.to(elfSpeech, 0.2, { rotation: 0 });
-  }, 401);
+  animateLeprechaun();
 
   //Show bubble
   speechBubble.style.display = "flex";
@@ -389,7 +384,7 @@ function playStart(e) {
 
   numberTickerCTA.addEventListener("click", () => {
     let coinArray = document.querySelectorAll(".number-ticker-coin");
-
+    coinClinks = false;
     coinArray.forEach(coin => {
       coin.style.display = "none";
     });
@@ -411,6 +406,7 @@ function checkNameInput() {
     personObject.Name = nameInput.value;
     console.log(personObject);
     TweenMax.to(gameNameInputPage, 1, { display: "none", x: -1500 });
+    music.play();
     TweenMax.from(gamePage, 1, { display: "none", x: 1500 });
     TweenMax.to(gamePage, 1, { display: "grid" });
     hideSpeechBubble();
@@ -419,6 +415,14 @@ function checkNameInput() {
     setTimeout(() => {
       elfSpeechAnimation();
     }, 1000);
+    // LEPRECHAUN SPEAKING
+    setTimeout(() => {
+      animateLeprechaun(welcomeSound);
+    }, 2000);
+    // 2nd Half
+    setTimeout(() => {
+      animateLeprechaun();
+    }, 3200);
   }
 }
 
@@ -495,15 +499,16 @@ let playerHearts = [
 ];
 
 function flipCard() {
+  
   if (lockBoard) return;
   if (this === firstCard) return;
-
+  
   this.classList.add("flip");
 
   if (!hasFlippedCard) {
     hasFlippedCard = true;
     firstCard = this;
-
+    
     return;
   }
 
@@ -547,24 +552,40 @@ function disableCards() {
   // Applying styling to levels based on score
   if (playerScore === 1) {
     scoreContainer.removeChild(score0);
-
+    setTimeout(() => {
+      animateLeprechaun(welldoneSound);
+    }, 500);
+    newShimmer();
+    // newShimmer1.volume = 0.2;
+    // newShimmer1.play();
     TweenMax.to(score100, 0, { display: "block" });
     TweenMax.from(score100, 1, { y: -1000, x: -100, scale: 6 });
     // prizeLvl2.classList.remove("inactive");
     // prizeLvl2.classList.add("active");
   } else if (playerScore === 3) {
     scoreContainer.removeChild(score100);
-
+    
+    setTimeout(() => {
+      animateLeprechaun(goodoneSound);
+    }, 500);
+    newShimmer();
     TweenMax.to(score250, 0, { display: "block" });
     TweenMax.from(score250, 1, { y: -1000, x: -100, scale: 6 });
   } else if (playerScore === 5) {
     scoreContainer.removeChild(score250);
-
+    animateLeprechaun(perfectSound);
+    setTimeout(() => {
+      animateLeprechaun(perfectSound);
+    }, 500);
+    newShimmer();
     TweenMax.to(score500, 0, { display: "block" });
     TweenMax.from(score500, 1, { y: -1000, x: -100, scale: 6 });
   } else if (playerScore === 6) {
     scoreContainer.removeChild(score500);
-
+    newShimmer();
+    setTimeout(() => {
+      animateLeprechaun(scoreSound);
+    }, 500);
     TweenMax.to(score1000, 0, { display: "block" });
     TweenMax.from(score1000, 1, { y: -1000, x: -100, scale: 6 });
     // TIME OUT FOR EMAIL PAGE
@@ -642,6 +663,7 @@ function shuffle() {
 
 cards.forEach(card => card.addEventListener("click", flipCard));
 
+
 // GAME NAME INPUT AREA BELOW
 
 // VALIDATING THE INPUT FOR NAME
@@ -667,21 +689,21 @@ nameInput.addEventListener("input", () => {
 
 // ELF ANIMATIONS
 
-let elfDescription = document.querySelector("#elf-description");
-function elfDescriptionAnimation() {
-  setTimeout(() => {
-    TweenMax.to(elfDescription, 0, { opacity: 1 }),
-      TweenMax.from(elfDescription, 1, { x: -1500 });
-  }, 1000);
-}
+// let elfDescription = document.querySelector("#elf-description");
+// function elfDescriptionAnimation() {
+//   setTimeout(() => {
+//     TweenMax.to(elfDescription, 0, { opacity: 1 }),
+//       TweenMax.from(elfDescription, 1, { x: -1500 });
+//   }, 1000);
+// }
 
-let elfNameInput = document.querySelector("#elf-name-input");
-function elfNameAnimation() {
-  setTimeout(() => {
-    TweenMax.to(elfNameInput, 0, { opacity: 1 }),
-      TweenMax.from(elfNameInput, 1, { x: -1500 });
-  }, 1000);
-}
+// let elfNameInput = document.querySelector("#elf-name-input");
+// function elfNameAnimation() {
+//   setTimeout(() => {
+//     TweenMax.to(elfNameInput, 0, { opacity: 1 }),
+//       TweenMax.from(elfNameInput, 1, { x: -1500 });
+//   }, 1000);
+// }
 
 // EMAIL VALIDATION FOR EMAIL INPUT PAGE //
 const emailInputField = document.querySelector("#email-input-field");
@@ -851,3 +873,156 @@ gameWinnerCTA.addEventListener("click", () => {
 //     TweenMax.from(scoreAmount, 1, {opacity:0})
 //   })
 // }
+
+
+// EXTRA ADDITIONS -- ADDING COUNTUP
+import { CountUp } from 'countup.js';
+let countNumber = document.querySelector('.count-number');
+
+let countValue = getRandomInt (599000, 599500)
+let countUp = new CountUp(countNumber, countValue, {duration: 8});
+
+function countStart() {
+  
+  countUp.start();
+  setTimeout(countUpdate, 8200);
+}
+
+function countUpdate() {
+  console.log('hello')
+
+  countValue = countValue + getRandomInt(50, 20);
+  countUp.update(countValue);
+  if(coinClinks){
+  randomClink();
+  }
+  setTimeout(()=>{requestAnimationFrame(countUpdate);}, getRandomInt(3000,7000));
+
+}
+
+function getRandomInt (min, max) {
+  return Math.floor(Math.random() * (max - min) ) + min;
+}
+
+// CALLBACK EXAMPLE
+
+let calc = function(num1, num2, testCallback){
+  return testCallback(num1, num2);
+}
+
+console.log(calc(20,10, function(a,b){return a-b}));
+
+// NEW LEPRECHAUN SVG
+
+const lepHead = document.querySelector("#leprechaun-head");
+const lepLeft = document.querySelector("#leprechaun-left");
+const lepRight = document.querySelector("#leprechaun-right");
+const lepBody = document.querySelector("#leprechaun-body");
+
+// NEW MUSIC ADDED
+
+const music = document.querySelector("#music");
+music.volume = 0.2;
+
+// Setting state for initial sound being on
+
+let soundControl = document.querySelector('#sound-control');
+let soundOn = document.querySelector('#sound-on');
+let soundOff = document.querySelector('#sound-off');
+let sound = true;
+
+soundControl.addEventListener('click', ()=>{
+  if (sound){
+    console.log('hello');
+    soundOn.style.display = 'none';
+    soundOff.style.display ='block';
+    music.pause();
+    shimmer.volume = 0;
+    clinks.forEach(clink =>{
+      clink.volume = 0;
+    })
+    sound = false;
+  } else {
+    sound = true;
+    soundOn.style.display = 'block';
+    soundOff.style.display =  'none';
+    music.play();
+    shimmer.volume = 0.2;
+    clinks.forEach(clink =>{
+      clink.volume = 0.2;
+    })
+  }
+})
+
+// EXTRA SOUND EFFECTS
+const shimmer = document.querySelector("#shimmer");
+let clinks = document.querySelectorAll('.clink');
+
+clinks.forEach(clink =>{
+  clink.volume = 0.2;
+})
+
+shimmer.volume = 0;
+
+function newShimmer(){
+  if(sound){
+  let newShimmer = shimmer.cloneNode(true);
+  newShimmer.volume = 0.1;
+  newShimmer.play();
+}
+}
+
+function randomClink(){
+  let newClink = clinks[Math.floor(Math.random() * Math.floor(3))].cloneNode(true);
+  newClink.volume = 0.05;
+  newClink.play();
+}
+
+let coinClinks = true;
+
+let swipeClick = document.querySelector('#swipe');
+
+function newSwipeClickSound(){
+  if(sound){
+  let newSwipeClick = swipeClick.cloneNode(true);
+  newSwipeClick.volume = 0.2;
+  newSwipeClick.play();
+  console.log('swip')
+  }
+}
+
+// LEPRECHAUN SOUNDS
+const welcomeSound = document.querySelector('#welcome');
+const welldoneSound = document.querySelector('#welldone');
+const goodoneSound = document.querySelector('#goodone');
+const perfectSound = document.querySelector('#perfect');
+const scoreSound = document.querySelector('#score');
+
+welcomeSound.volume = 0.3;
+welldoneSound.volume = 0.3;
+goodoneSound.volume = 0.3;
+perfectSound.volume = 0.3;
+scoreSound.volume = 0.3;
+
+function animateLeprechaun(lepSound) {
+  TweenMax.to(elfSpeech, 0.2, { rotation: -1 });
+  TweenMax.to(lepHead, 0.2, { y:getRandomInt(20,50) })
+  TweenMax.to(lepRight, 0.2, { rotation:-2, x:-20 })
+  TweenMax.to(lepLeft, 0.2, { rotation:2, x:20 })
+  setTimeout(() => {
+    TweenMax.to(elfSpeech, 0.2, { rotation: 2 });
+    
+  }, 200);
+
+  setTimeout(() => {
+    TweenMax.to(elfSpeech, 0.2, { rotation: 0 });
+    TweenMax.to(lepHead, 0.2, { y:0 })
+    TweenMax.to(lepRight, 0.2, { rotation:0, x:0 })
+    TweenMax.to(lepLeft, 0.2, { rotation:0, x:0 })
+  }, 401);
+
+  if(sound && lepSound){
+    lepSound.play();
+  }
+}
+
