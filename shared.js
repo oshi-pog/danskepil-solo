@@ -855,6 +855,10 @@ const finalEmail = document.querySelector("#email-final");
 
 gameWinnerCTA.addEventListener("click", () => {
   event.preventDefault();
+  // LEAD CONVERSION TRACKING ON EMAIL SUBMIT
+  fbq('track', 'lead', {
+    promotion: 'Danskespil'
+  });
 
   personObject.Email = finalEmail.value;
   postData(personObject);
@@ -958,9 +962,12 @@ soundControl.addEventListener('click', ()=>{
 const shimmer = document.querySelector("#shimmer");
 let clinks = document.querySelectorAll('.clink');
 
-clinks.forEach(clink =>{
-  clink.volume = 0.2;
-})
+function randomClink(){
+  let newClink = clinks[Math.floor(Math.random() * Math.floor(3))].cloneNode(true);
+  newClink.volume = 0.05;
+  newClink.play();
+}
+let coinClinks = true;
 
 shimmer.volume = 0;
 
@@ -972,13 +979,8 @@ function newShimmer(){
 }
 }
 
-function randomClink(){
-  let newClink = clinks[Math.floor(Math.random() * Math.floor(3))].cloneNode(true);
-  newClink.volume = 0.05;
-  newClink.play();
-}
 
-let coinClinks = true;
+
 
 let swipeClick = document.querySelector('#swipe');
 
