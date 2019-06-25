@@ -856,9 +856,9 @@ const finalEmail = document.querySelector("#email-final");
 gameWinnerCTA.addEventListener("click", () => {
   event.preventDefault();
   // LEAD CONVERSION TRACKING ON EMAIL SUBMIT
-  fbq('track', 'lead', {
-    promotion: 'Danskespil'
-  });
+  // fbq('track', 'lead', {
+  //   promotion: 'Danskespil'
+  // });
 
   personObject.Email = finalEmail.value;
   postData(personObject);
