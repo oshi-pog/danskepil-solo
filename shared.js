@@ -1,6 +1,6 @@
 //BOTTOM MENU
 import { TweenMax, Power2, TimelineLite } from "gsap/TweenMax";
-import { timeout } from "q";
+
 
 //DATABASE
 
